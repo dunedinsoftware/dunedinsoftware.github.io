@@ -6,7 +6,7 @@ People talk about things they call "trends." Two things therefore concern us:
 
 To answer the first question we need to define what a trend is. We have many options, but most simply we might try:
 
-<div align="center"><img src="article_1/formula_1.png" height=32/></div>
+<div align="center"><img src="article_1/formula_1.png" height=48/></div>
 
 <span hidden>
 $$T = \frac{\lvert \sum_{t=0}^{n}r_t \rvert}{\sum_{t=0}^{n}\lvert r_t \rvert} $$
@@ -51,7 +51,7 @@ def test_stationarity(symbol):
   df_results = pd.DataFrame(results).dropna()
 ```
 ## S&P 500
-<img src=article_1/trend_stationarity_gspc_t1.png width=800/>
+<img src="article_1/trend_stationarity_gspc_t1.png" width=800/>
 
 # VIX
 ![stationarity](article_1/trend_stationarity_vix_t1.png)
