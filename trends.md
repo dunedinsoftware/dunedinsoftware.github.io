@@ -1,5 +1,5 @@
 
-# The Mystery of Trends
+# Predictability of Trends
 People talk about things they call "trends." Two things therefore concern us:
 - Are trends coherent? Do they really exist? In other words, can we *define* what a trend actually is, and find evidence of such a thing?
 - If so, can we predict the onset of a trend?
@@ -51,7 +51,7 @@ def test_stationarity(symbol):
   df_results = pd.DataFrame(results).dropna()
 ```
 ## S&P 500
-<img src="article_1/trend_stationarity_gspc_t1.png" width=800/>
+![stationarity](article_1/trend_stationarity_gspc_t1.png)
 
 # VIX
 ![stationarity](article_1/trend_stationarity_vix_t1.png)
@@ -97,4 +97,6 @@ Again, we do not find significant correlation in any of the three securities. In
 ## Conclusion
 We have looked at two simple models of trendiness. At best they exhibit only weak significance on the studies sampled. There is no clear correlation of trend strength with data window size.
 
-The code can be found [here](trendiness.py).
+Experiment online with this code:
+<br>
+<a href="https://colab.research.google.com/github/dunedinsoftware/dunedinsoftware.github.io/blob/master/article_1/trends.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg"/></a>
