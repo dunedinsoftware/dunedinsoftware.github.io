@@ -51,7 +51,7 @@ def test_stationarity(symbol):
   df_results = pd.DataFrame(results).dropna()
 ```
 ## S&P 500
-![stationarity](article_1/trend_stationarity_gspc_t1.png)
+<img src=article_1/trend_stationarity_gspc_t1.png width=800/>
 
 # VIX
 ![stationarity](article_1/trend_stationarity_vix_t1.png)
