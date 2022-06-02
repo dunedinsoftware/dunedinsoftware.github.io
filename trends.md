@@ -6,17 +6,11 @@ People talk about things they call "trends." Two things therefore concern us:
 
 To answer the first question we need to define what a trend is. We have many options, but most simply we might try:
 
-## Definition 1
-$$T = \frac{\lvert \sum_{t=0}^{n}r_t \rvert}{\sum_{t=0}^{n}\lvert r_t \rvert} $$
+<img src="article_1/formula_1.png" height=64/>
 
 with
 
-$$
-\begin{equation}
-{r_t} = \frac{p_t}{p_t-1}-1
-\enspace,\enspace {P} = \{p_0, p_1, p_2, \dots \enspace p_n \in R \enspace | \enspace p_t > 0\}, \enspace p_t \in P
-\end{equation}
-$$
+<img src="article_1/formula_2.png" height=64/>
 
 In other words trendiness is a coefficient corresponding to the ratio of signed to unsigned returns over a set of prices $P$. 
 
