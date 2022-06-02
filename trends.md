@@ -6,11 +6,12 @@ People talk about things they call "trends." Two things therefore concern us:
 
 To answer the first question we need to define what a trend is. We have many options, but most simply we might try:
 
-<img src="article_1/formula_1.png" height=64/>
+<div align="center"><img src="article_1/formula_1.png" height=64/></div>
 
 with
 
-<img src="article_1/formula_2.png" height=64/>
+<div align="center"><img src="article_1/formula_2.png"/></div>
+
 
 In other words trendiness is a coefficient corresponding to the ratio of signed to unsigned returns over a set of prices $P$. 
 
@@ -50,11 +51,12 @@ What we're looking for is the solid red line (the median correlation of $T$ betw
 ## Definition 2
 One shortcoming of our trendiness definition is that its numerator is overly sensitive to single-period jumps in price. Consider the case of a security strictly monotonically decreasing in price over the period with the exception of a single jump $r_j$.
 
-$$r_j > \sum_{t=0}^{n}r_t \enspace | \enspace t \neq j$$
+<div align="center"><img src="article_1/formula_3.png"/></div>
+
 
 then $T > 0$, but would we really care to call this evidence of a trend? Let's try a different definition that addresses this shortcoming:
 
-$$T = 2 * \lvert 0.5 - p(r_t > 0) \rvert $$
+<div align="center"><img src="article_1/formula_4.png"/></div>
 
 In other words, $T$ is the excess probability of non-random price movements within the data in question, and our lambda now becomes:
 
