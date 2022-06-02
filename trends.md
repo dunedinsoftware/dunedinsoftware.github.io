@@ -50,17 +50,15 @@ def test_stationarity(symbol_path):
 ## EUR
 ![stationarity](figs/trend_stationarity_eur_t1.png)
 
-What we're looking for is the solid red line (the median correlation of $T$ between the training and test chunks) outside limits of the dotted (-0.20, +0.20) weak significance thresholds. The first two charts are inconclusive, but the EUR chart suggests a weak correlation in the $55 \leq n \leq 100$ range.
+What we're looking for is the solid red line (the median correlation of $T$ between the training and test chunks) outside limits of the dotted (-0.20, +0.20) weak significance thresholds. The first two charts are inconclusive, but the EUR chart suggests a weak correlation in the $55 \leq n \leq 100$ range. Note that this correlation makes no assumptions about the *direction* of the trend for a given train/test period: $T$ is the same whether the security advances in the train period and declines in the test period or advances or declines in both together. 
 
-Note that this correlation makes no assumptions about the *direction* of the trend for a given train/test period: $T$ is the same whether the security advances in the train period and declines in the test period or advances or declines in both together. 
-
-Something we haven't done is to back out a drift component from the T. Assume:
+Something we haven't done is to back out a drift component $d$ from the T. Assume:
 
   $$chunk\enspace size = \lambda T + c $$
 
 then solve for $c$ in $T_{ret}$ and $T_{all}$, disregarding $\lambda$, leaving:
   
-  $$drift\enspace coefficient = 1.0 - \frac{c_{ret}}{c_{all}}$$
+  $$d = 1.0 - \frac{c_{ret}}{c_{all}}$$
 
 which comes out as $\approx$ 0.21 for GSPC.
 
@@ -80,7 +78,7 @@ def drift_factor(symbol_path):
   df_results = pd.DataFrame(results).dropna()
   _, c_null = np.polyfit(df_results["chunk_size"], df_results["t_null"], deg=1)
   _, c_1 = np.polyfit(df_results["chunk_size"], df_results["trendiness"], deg=1)
-  k = abs(c_1) / (abs(c_1) + abs(c_null))
+  d = abs(c_all) / (abs(c_1) + abs(c_null))
 ```
 
 ## Definition 2
