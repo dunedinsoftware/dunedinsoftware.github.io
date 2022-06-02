@@ -6,7 +6,7 @@ People talk about things they call "trends." Two things therefore concern us:
 
 To answer the first question we need to define what a trend is. We have many options, but most simply we might try:
 
-<div align="center"><img src="article_1/formula_1.png" height=64/></div>
+<div align="center"><img src="article_1/formula_1.png" height=32/></div>
 
 <span hidden>
 $$T = \frac{\lvert \sum_{t=0}^{n}r_t \rvert}{\sum_{t=0}^{n}\lvert r_t \rvert} $$
