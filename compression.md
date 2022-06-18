@@ -5,7 +5,7 @@ We can model the efficacy of a classification strategy that operates on time ser
 <div align="center"><img src="article_2/formula_1.png"/></div>
 
 <span hidden>
-$$s = (s0, s1, s2, ...)$$
+$$s = (s_0, s_1, s_2, ...)$$
 </span>
 
 where 
