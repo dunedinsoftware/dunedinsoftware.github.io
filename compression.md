@@ -76,6 +76,7 @@ y_q \enspace | \enspace (y_q: (s_n\enspace;\enspace 0)) \in P\\
 \text{otherwise 0}
 \end{cases}
 $$
+
 </span>
 
 where *t* is some coefficient of probability and *i* is the minimum number of instances of a string for its tuple to accept membership in *P*, then define a *coverage* score
