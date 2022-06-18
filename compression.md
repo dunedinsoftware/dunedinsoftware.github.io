@@ -193,7 +193,13 @@ print("Null model coverage: %.3f" % coverage)
 ```
 
 ## Comparing two models
-Two models constructed from the same data series can be directly compared via the coverage metric, where the better model has a higher *r*. All this says is that the better model is able to explain a greater amount of that data on a probabilistic basis, and thereby render the data more compressible. The choice of *t* and *i* and indeed the parameter `max_length` passed to `compress` (corresponding to the longest string to retain) can be customised based upon one's data size and processing capability as well as model expectations. Ultimately the specific choices for these parameters are largely irrelevant; all that's important is to build a dictionary of a reasonable size, and to use the same parameters when comparing the two models. 
+Two models constructed from the same data series can be directly compared via the coverage metric, where the better model has a higher *r*. All this says is that the better model is able to explain a greater amount of that data on a probabilistic basis, and thereby render the data more compressible. The choice of *t* and *i* and indeed the parameter `max_length` passed to `compress` (corresponding to the longest string to retain) can be customised based upon one's data size and processing capability as well as model expectations. Ultimately the specific choices for these parameters are largely irrelevant; all that's important is to build a dictionary of a reasonable size, and to use the same parameters when comparing the two models.
+
+Large dictionaries imply the retention of long strings, which are therefore suspect in a stochastic setting. They result from a combination of setting `max_length` too high, the probability threshold `t` too low, and/or the minimum number of matches `i` too low.
+
+Conversely small dictionaries contain few prediction rules, and thus explain only a small subset of the underlying data. They result from the reverse of the conditions above.
+
+One possible setup is to tweak the parameters so that the baseline is *just* able to derive a few rules. These rules most probably will just be artefacts without any real use or significance, but they indicate that the compressor has been calibrated appropriately for the complexity (and size) of the dataset. You can now apply the model to the encoding and recompress the data to see if the coverage reading increases.
 
 ## Making predictions
 We can split our data into a training and a test set, call `compress` on our training data and then `decompress` on our test data, passing in the dictionary of strings we obtained. `decompress` scores the strings obtained from the training data against any matching strings found in the test data. We assess the efficacy of the model by subtracting the unconditional probability of a positive classification (based on the actual test data distribution) from the mean accuracy of the model on this test data:
