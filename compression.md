@@ -110,38 +110,8 @@ def compress(dict, max_length=5, p=lambda q: q > 0.65, min_n=30):
   coverage = sum([len(v["s"]) * v["n"] for v in retained])
   return sorted(retained, key = lambda r: len(r["s"])), coverage
 
-def decompress(compressed, dict):
-  dates, values = sorted(dict.keys()), set(dict.values())
-  indices = {key : [] for key in values}
-  [indices[dict[dates[i]]].append(i) for i in range(len(dates)-1)] # indices by key
-  results = []
-  for s in [r["s"] for r in compressed]:
-    matching = set(indices[s[0]])
-    for i in range(1, len(s)):
-      matching = matching.intersection([j-i for j in indices[s[i]]])
-    if len(matching) > 0:
-      results.append({"s": s, "n": len(matching), "p": np.mean([dict[dates[j+len(s)]] & 1 for j in matching])})
-  return results
-
 def encode(dfl):
   return { dt : 1 if dfl.series[dt]["prev_delta"] > 0 else 0 for dt in dfl.s_dates }
-
-def encode_null(encoding):
-  dates, vals = sorted(encoding.keys()), random.sample(list(encoding.values()), len(encoding.keys()))
-  return { dates[i] : vals[i] for i in range(len(dates)) }
-
-def encode_null_model(encoding, xor_bit):
-  dates, vals = sorted(encoding.keys()), random.sample([w & xor_bit for w in list(encoding.values())]), len(encoding.keys()))
-  return { dates[i] : encoding[dates[i]] | vals[i] for i in range(len(dates)) }
-
-def superpose_model(directory, symbol, encoding, threshold, xor_bit):
-  model_set = np.load("%s/%s-model_set.v2.npy" % (directory, symbol), allow_pickle=True).tolist()
-  return {dt : encoding[dt] | xor_bit if sum(model_set["traded_dates"][dt]["signal"]) / sum([abs(q) for q in model_set["traded_dates"][dt]["signal"]]) > threshold else encoding[dt] for dt in model_set["traded_dates"].keys()}
-
-def split_data(data, split):
-  dates = sorted(data.keys())
-  cutoff = int(len(dates) * split)
-  return { dt : data[dt] for dt in dates[0:cutoff] }, { dt : data[dt] for dt in dates[cutoff:] }
 
 def load_data(directory, symbol):
   return data_file_loader({"path": "%s/%s" % (directory, symbol)})
@@ -151,6 +121,12 @@ The workflow proceeds as follows:
 
 ## Test the data for inherent structure
 It may be that the data contains some level of structure, and we can determine this without the need to generate a model. The `encode_null` method randomises the encoded data whilst preserving its distribution. Successive calls to `compress` return coverage metrics from the baseline vs. randomised data.
+
+```
+def encode_null(encoding):
+  dates, vals = sorted(encoding.keys()), random.sample(list(encoding.values()), len(encoding.keys()))
+  return { dates[i] : vals[i] for i in range(len(dates)) }
+```
 
 ```
 encoding = encode(load_data(directory, symbol))
@@ -195,15 +171,25 @@ In fact we can encode multiple models on top of one another, so long as each has
 Again we compare our results against a null baseline. In this case however we do not randomise the encoded data, but rather randomise the signals from the model that have been superposed on it, again preserving the model's signal distribution.
 
 ```
-    encoding = encode(load_data(directory, symbol))
-    
-    model_encoding = superpose_model(directory, symbol, encoding, -0.1, 2)
-    results, coverage = compress(model_encoding)
-    print("Model coverage: %.3f" % coverage)
+def encode_null_model(encoding, xor_bit):
+  dates, vals = sorted(encoding.keys()), random.sample([w & xor_bit for w in list(encoding.values())]), len(encoding.keys()))
+  return { dates[i] : encoding[dates[i]] | vals[i] for i in range(len(dates)) }
 
-    model_null_encoding = encode_null_model(model_encoding, 2)
-    results, coverage = compress(model_null_encoding)
-    print("Null model coverage: %.3f" % coverage)
+def superpose_model(directory, symbol, encoding, threshold, xor_bit):
+  model_set = np.load("%s/%s-model_set.v2.npy" % (directory, symbol), allow_pickle=True).tolist()
+  return {dt : encoding[dt] | xor_bit if sum(model_set["traded_dates"][dt]["signal"]) / sum([abs(q) for q in model_set["traded_dates"][dt]["signal"]]) > threshold else encoding[dt] for dt in model_set["traded_dates"].keys()}
+```
+
+```
+encoding = encode(load_data(directory, symbol))
+    
+model_encoding = superpose_model(directory, symbol, encoding, -0.1, 2)
+results, coverage = compress(model_encoding)
+print("Model coverage: %.3f" % coverage)
+
+model_null_encoding = encode_null_model(model_encoding, 2)
+results, coverage = compress(model_null_encoding)
+print("Null model coverage: %.3f" % coverage)
 ```
 
 ## Comparing two models
@@ -213,5 +199,25 @@ Two models constructed from the same data series can be directly compared via th
 We can split our data into a training and a test set, call `compress` on our training data and then `decompress` on our test data, passing in the dictionary of strings we obtained. `decompress` scores the strings obtained from the training data against any matching strings found in the test data. We assess the efficacy of the model by subtracting the unconditional probability of a positive classification (based on the actual test data distribution) from the mean accuracy of the model on this test data:
 
 ```
+def split_data(data, split):
+  dates = sorted(data.keys())
+  cutoff = int(len(dates) * split)
+  return { dt : data[dt] for dt in dates[0:cutoff] }, { dt : data[dt] for dt in dates[cutoff:] }
+```
+
+```
+def decompress(compressed, dict):
+  dates, values = sorted(dict.keys()), set(dict.values())
+  indices = {key : [] for key in values}
+  [indices[dict[dates[i]]].append(i) for i in range(len(dates)-1)] # indices by key
+  results = []
+  for s in [r["s"] for r in compressed]:
+    matching = set(indices[s[0]])
+    for i in range(1, len(s)):
+      matching = matching.intersection([j-i for j in indices[s[i]]])
+    if len(matching) > 0:
+      results.append({"s": s, "n": len(matching), "p": np.mean([dict[dates[j+len(s)]] & 1 for j in matching])})
+  return results
+
 efficacy = sum([r["n"] * r["p"] for r in test]) / sum([r["n"] for r in test]) - np.mean([q & 1 for q in test_data.values()])
 ```
