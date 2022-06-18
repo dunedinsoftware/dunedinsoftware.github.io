@@ -19,12 +19,11 @@ with
 <span hidden>
 $$
 \begin{equation}
-{r_t} = \frac{p_t}{p_t-1}-1
+{r_t} = \frac{p_t}{p_{t-1}}-1
 \enspace,\enspace {P} = \{p_0, p_1, p_2, \dots \enspace p_n \in R \enspace | \enspace p_t > 0\}, \enspace p_t \in P
 \end{equation}
 $$
 </span>
-
 
 In other words trendiness is a coefficient corresponding to the ratio of signed to unsigned returns over a set of prices *P*. 
 
