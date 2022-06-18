@@ -55,20 +55,19 @@ then
 
 <div align="center"><img src="article_2/formula_6.png"/></div>
 
-<span hidden>
 $$
 p_n \in P \enspace | \enspace \frac{x}{x+y} > t \enspace and \enspace x+y > i
-$$
 
-$$
+\newline
+
 x = 
 \begin{cases}
 x_q \enspace | \enspace (x_q: (s_n\enspace;\enspace 1)) \in P\\
 \text{otherwise 0}
 \end{cases}
-$$
 
-$$
+\newline
+
 y = 
 \begin{cases}
 y_q \enspace | \enspace (y_q: (s_n\enspace;\enspace 0)) \in P\\
