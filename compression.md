@@ -41,7 +41,7 @@ let
 $$P = \{ (n_0: s_0), (n_1: s_1), .. \}$$ 
 </span>
 
-be the set of tuples containing improper substrings of *s* and the number of times each occurs in *P*, such that for every
+be the set of tuples containing the improper substrings of *s* and the number of times each occurs in *P*, such that for every
 
 <div align="center"><img src="article_2/formula_5.png"/></div>
 
