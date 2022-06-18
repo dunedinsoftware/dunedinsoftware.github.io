@@ -182,14 +182,14 @@ e \in \{0, 1, 2, 3\}:
 $$
 </span>
 
----
+
 | Encoding | Model classification | Result |
 | -------- | -------------------- | ------ |
 | No signal| No signal            | 0      |
 | Signal   | No signal            | 1      |
 | No signal| Signal               | 2      |
 | Signal   | Signal               | 3      |
----
+
 
 In fact we can encode multiple models on top of one another, so long as each has a distinct bit mask, namely a bit mask that is a power of 2. 
 
