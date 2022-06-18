@@ -87,7 +87,7 @@ r = \sum (a_j * dim(b_j) \enspace | \enspace (a_j: b_j) \in P )
 $$
 -->
 
-In plain English, we start by transforming the time series data into a vector of 0s and 1s where these represent the classifications we want to encode. We then build a dictionary of substrings taken from the encoded data where the expectation of the next classification exceeds a given threshold and we have sufficient instances of it that we can make statistically meaningful deductions (typically *i* > 30). Finally we compute a coverage score based on the length of each retained string and the number of times it occurs in the dictionary.
+In plain English, we start by transforming the time series data into a vector of 0s and 1s where these represent the classifications we want to encode. We then build a dictionary of substrings taken from the encoded data where the expectation the next classification is positive exceeds a given threshold and we have sufficient instances of it that we can make statistically meaningful deductions (typically *i* > 30). Finally we compute a coverage score based on the length of each retained string and the number of times it occurs in the dictionary.
 
 The code to implement all the above follows.
 
