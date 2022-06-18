@@ -55,6 +55,8 @@ then
 
 <div align="center"><img src="article_2/formula_6.png"/></div>
 
+<span hidden>
+
 $$
 p_n \in P \enspace | \enspace \frac{x}{x+y} > t \enspace and \enspace x+y > i
 
