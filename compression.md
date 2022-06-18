@@ -81,11 +81,11 @@ where *t* is some coefficient of probability and *i* is the minimum number of in
 
 <div align="center"><img src="article_2/formula_7.png"/></div>
 
-<span hidden>
+<!--
 $$
 r = \sum (a_j * dim(b_j) \enspace | \enspace (a_j: b_j) \in P )
 $$
-</span>
+-->
 
 In plain English, we start by transforming the time series data into a vector of 0s and 1s where these represent the classifications we want to encode. We then build a dictionary of substrings taken from the encoded data where the expectation of the next classification exceeds a given threshold and we have sufficient instances of it that we can make statistically meaningful deductions (typically *i* > 30). Finally we compute a coverage score based on the length of each retained string and the number of times it occurs in the dictionary.
 
@@ -144,20 +144,19 @@ We apply a model directly to the encoded data as a bit mask. For example, if
 
 <div align="center"><img src="article_2/formula_8.png"/></div>
 
-<span hidden>
+<!--
 $$e \in \{0, 1\}$$
-</span>
+-->
 
 describes the model-free encoding then after encoding with a model with a bit mask of 2, 
 
 <div align="center"><img src="article_2/formula_9.png"/></div>
 
-<span hidden>
+<!--
 $$
 e \in \{0, 1, 2, 3\}:
 $$
-</span>
-
+-->
 
 | Encoding | Model classification | Result |
 | -------- | -------------------- | ------ |
