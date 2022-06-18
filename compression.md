@@ -2,7 +2,7 @@
 
 We can model the performance of a classification strategy that operates on time series data by comparing the relative compressibility of the data before and after applying the strategy. Specifically, given
 
-<div align="center"><img src="article_2/formula_1.png" height=48/></div>
+<div align="center"><img src="article_2/formula_1.png"/></div>
 
 <span hidden>
 $$s = (s0, s1, s2, ...)$$
@@ -10,7 +10,7 @@ $$s = (s0, s1, s2, ...)$$
 
 where 
 
-<div align="center"><img src="article_2/formula_2.png" height=48/></div>
+<div align="center"><img src="article_2/formula_2.png"/></div>
 
 <span hidden>
 $$
@@ -27,7 +27,7 @@ $$
 
 and *v* is a time-ordered vector of prices
 
-<div align="center"><img src="article_2/formula_3.png" height=48/></div>
+<div align="center"><img src="article_2/formula_3.png"/></div>
 
 <span hidden>
 $$v = (v_0, v_1, v_2, ...)$$
@@ -35,7 +35,7 @@ $$v = (v_0, v_1, v_2, ...)$$
 
 let 
 
-<div align="center"><img src="article_2/formula_4.png" height=48/></div>
+<div align="center"><img src="article_2/formula_4.png"/></div>
 
 <span hidden>
 $$P = \{ (n_0: s_0), (n_1: s_1), .. \}$$ 
@@ -43,7 +43,7 @@ $$P = \{ (n_0: s_0), (n_1: s_1), .. \}$$
 
 be the set of tuples containing improper substrings of *s* and the number of times each occurs in *P*, such that for every
 
-<div align="center"><img src="article_2/formula_5.png" height=48/></div>
+<div align="center"><img src="article_2/formula_5.png"/></div>
 
 <span hidden>
 $$
