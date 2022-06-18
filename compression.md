@@ -1,6 +1,6 @@
-# Probabilistic compressibility as a measure of model performance
+# Probabilistic compressibility as a measure of model efficacy
 
-We can model the performance of a classification strategy that operates on time series data by comparing the relative compressibility of the data before and after applying the strategy. Specifically, given
+We can model the efficacy of a classification strategy that operates on time series data by comparing the relative compressibility of the data before and after applying the strategy. Specifically, given
 
 <div align="center"><img src="article_2/formula_1.png"/></div>
 
