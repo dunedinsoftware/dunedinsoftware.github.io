@@ -172,8 +172,8 @@ Again we compare our results against a null baseline. In this case however we do
 
 ```
 def encode_null_model(encoding, xor_bit):
-  dates, vals = sorted(encoding.keys()), random.sample([w & xor_bit for w in list(encoding.values())]), len(encoding.keys()))
-  return { dates[i] : encoding[dates[i]] | vals[i] for i in range(len(dates)) }
+  dates, vals = sorted(encoding.keys()), random.sample([w & xor_bit for w in list(encoding.values())], len(encoding.keys()))
+  return { dates[i] : encoding[dates[i]] & ~xor_bit | vals[i] for i in range(len(dates)) }
 
 def superpose_model(directory, symbol, encoding, threshold, xor_bit):
   model_set = np.load("%s/%s-model_set.v2.npy" % (directory, symbol), allow_pickle=True).tolist()
